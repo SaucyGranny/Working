@@ -8,7 +8,7 @@ DATE: 26-Nov-2020
 CONFIG = {
     'app': {
         'title': 'COVID-19 API',
-        'description': 'Simply FAST API for COVID-19 cases exploratjion',
+        'description': 'Simply FAST API for COVID-19 cases exploron',
         'version': '2.1.1'
     }
 }
