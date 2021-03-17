@@ -16,6 +16,7 @@ from .helper import (helper_df_cleaning, helper_df_cols_cleaning,
 
 
 # Get Lookup table
+Class LookUpTable:
 def get_data_lookup_table() -> Dict[str, str]:
     """ Get lookup table (country references for iso2) """
     lookup_table_url = JHU_CSSE_FILE_PATHS['BASE_URL_LOOKUP_TABLE']
@@ -35,13 +36,13 @@ def get_data_daily_reports() -> pd.DataFrame:
     latest_base_url = helper_get_latest_data_url(JHU_CSSE_FILE_PATHS['BASE_URL_DAILY_REPORTS'])
 
     # Extract the data
-    df = pd.read_csv(latest_base_url)
+    self.df = pd.read_csv(latest_base_url)
 
     # Data pre-processing
     concerned_columns = ['Confirmed', 'Deaths', 'Recovered', 'Active']
-    df = helper_df_cols_cleaning(df, concerned_columns, int)
+    self.df = helper_df_cols_cleaning(df, concerned_columns, int)
     
-    return df
+    return self.df
 
 
 # Get data from daily reports (USA)

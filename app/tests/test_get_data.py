@@ -11,7 +11,7 @@ from ..utils import get_data
 
 # Test - Get Lookup table
 def test_get_data_lookup_table() -> None:
-    result = get_data.get_data_lookup_table()
+    result = get_data.LookUpTable.get_data_lookup_table()
     assert len(result) > 0
     assert isinstance(result, dict) is True
 

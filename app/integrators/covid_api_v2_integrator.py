@@ -39,7 +39,7 @@ class CovidAPIv2Integrator:
     """
     def __init__(self) -> None:
         """ Initiate DataFrames """
-        self.lookup_table = get_data_lookup_table()
+        self.LookUpTable.lookup_table = get_data_lookup_table()
         self.scheme = {
             'data': None,
             'dt': None,
