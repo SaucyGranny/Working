@@ -1,6 +1,6 @@
 """
 PROJECT: COVID19-API
-DESCRIPTION: Daily level information on various casess
+DESCRIPTION: Daily level information on various cas
 AUTHOR: Nuttaphat Arunoprayoch
 DATE: 9-Feb-2020
 RUN SERVER: uvicorn main:app --reload
