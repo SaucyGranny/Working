@@ -16,6 +16,7 @@ from .helper import (helper_df_cleaning, helper_df_cols_cleaning,
 
 
 # Get Lookup table
+Class LookUpTable:
 def get_data_lookup_table() -> Dict[str, str]:
     """ Get lookup table (country references for iso2) """
     lookup_table_url = JHU_CSSE_FILE_PATHS['BASE_URL_LOOKUP_TABLE']
@@ -29,7 +30,6 @@ def get_data_lookup_table() -> Dict[str, str]:
 
 
 # Get data from daily reports
-Class DailyReports:
 def get_data_daily_reports() -> pd.DataFrame:
     """ Get data from BASE_URL_DAILY_REPORTS """
     # Check the latest file
