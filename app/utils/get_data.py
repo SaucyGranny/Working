@@ -29,19 +29,20 @@ def get_data_lookup_table() -> Dict[str, str]:
 
 
 # Get data from daily reports
+Class DailyReports:
 def get_data_daily_reports() -> pd.DataFrame:
     """ Get data from BASE_URL_DAILY_REPORTS """
     # Check the latest file
     latest_base_url = helper_get_latest_data_url(JHU_CSSE_FILE_PATHS['BASE_URL_DAILY_REPORTS'])
 
     # Extract the data
-    df = pd.read_csv(latest_base_url)
+    self.df = pd.read_csv(latest_base_url)
 
     # Data pre-processing
     concerned_columns = ['Confirmed', 'Deaths', 'Recovered', 'Active']
-    df = helper_df_cols_cleaning(df, concerned_columns, int)
+    self.df = helper_df_cols_cleaning(df, concerned_columns, int)
     
-    return df
+    return self.df
 
 
 # Get data from daily reports (USA)
