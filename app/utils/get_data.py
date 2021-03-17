@@ -45,6 +45,7 @@ def get_data_daily_reports() -> pd.DataFrame:
 
 
 # Get data from daily reports (USA)
+Class DailyUSA:
 def get_data_daily_reports_us() -> pd.DataFrame:
     """ Get data from BASE_URL_DAILY_REPORTS """
     # Check the latest file
