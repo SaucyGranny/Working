@@ -22,6 +22,13 @@ from utils.get_data import get_data
 # Create a model and its methods
 class CovidAPIv1:
     """ Model and Its methods """
+    __instance = None
+
+    def __newSingle__(something):
+        if something.__instance is None:
+            something.__instance = super(CovidAPIv1, something).__new__(something)
+        return something.__instance
+
     def __init__(self) -> None:
         """ Get data from helper -> the source data """
         list_of_dataframes = get_data()
@@ -37,13 +44,13 @@ class CovidAPIv1:
         self.datetime_raw = self.df_confirmed['datetime'].unique().tolist()[0]
         self.timestamp = datetime.strptime(self.datetime_raw, '%m/%d/%y').timestamp()
 
-    def add_dt_and_ts(self, data: Dict[str, Any]) -> Dict[str, Any]:
+    def __add_dt_and_ts__(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """ Add datetime and timestamp to Dict data """
         data['dt'] = self.datetime_raw
         data['ts'] = self.timestamp
         return data
 
-    def get_current_status(self, list_required: bool = False) -> Dict[str, Any]:
+    def __get_current_status__(self, list_required: bool = False) -> Dict[str, Any]:
         """ Current data (Lastest date) """
         # Create a template
         countries = self.df_confirmed['Country/Region'].unique().tolist()
@@ -77,25 +84,25 @@ class CovidAPIv1:
 
         return current_data
 
-    def get_confirmed_cases(self) -> Dict[str, int]:
+    def __get_confirmed_cases(self) -> Dict[str, int]:
         """ Summation of all confirmed cases """
         data = {'confirmed': sum([int(i) for i in self.df_confirmed['confirmed']])}
         data = ConfirmedModel(**self.add_dt_and_ts(data))
         return data
 
-    def get_deaths(self) -> Dict[str, int]:
+    def __get_deaths(self) -> Dict[str, int]:
         """ Summation of all deaths """
         data = {'deaths': sum([int(i) for i in self.df_deaths['deaths']])}
         data = DeathsModel(**self.add_dt_and_ts(data))
         return data
 
-    def get_recovered(self) -> Dict[str, int]:
+    def __get_recovered(self) -> Dict[str, int]:
         """ Summation of all recovers """
         data = {'recovered': sum([int(i) for i in self.df_recovered['recovered']])}
         data = RecoveredModel(**self.add_dt_and_ts(data))
         return data
 
-    def get_total(self) -> Dict[str, Any]:
+    def __get_total(self) -> Dict[str, Any]:
         """ Summation of Confirmed, Deaths, Recovered """
         data = {
             'confirmed': self.get_confirmed_cases().confirmed,
@@ -105,7 +112,7 @@ class CovidAPIv1:
         data = TotalModel(**self.add_dt_and_ts(data))
         return data
 
-    def get_affected_countries(self) -> Dict[str, List]:
+    def __get_affected_countries(self) -> Dict[str, List]:
         """ The affected countries """
         # Sorted alphabetically and exlucde 'Others'
         sort_filter_others = lambda country_list: sorted([country for country in country_list if country not in ['Others']])
@@ -113,7 +120,7 @@ class CovidAPIv1:
         data = CountriesModel(**self.add_dt_and_ts(data))
         return data
 
-    def get_time_series(self) -> Dict[str, Dict]:
+    def __get_time_series(self) -> Dict[str, Dict]:
         """ Raw time series """
         data = {
             'confirmed': [v for v in self.df_time_series_confirmed.values()],
